@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Del Zotto Concrete | Premium Concrete Solutions</title>
+    <!-- FontAwesome v6 for modern icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style/style.css">
+     <link rel="preload" href="assets/hero-bg.mp4" as="video" type="video/mp4">
+</head>
+<body>
+    
+    <!-- Primary Header -->
+    <header class="main-header" id="mainHeader">
+        <div class="header-container">
+            <!-- Left: Logo -->
+            <a href="#" class="logo-link">
+                <img src="assets/delzotto-logo.svg" alt="Del Zotto Concrete Logo" class="logo-img">
+            </a>
+
+            <!-- Center: Nav Items -->
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-item active">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="nav-item">Services <i class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Forming & Pouring</a></li>
+                            <li><a href="#">Stamped Concrete</a></li>
+                            <li><a href="#">Commercial Concrete</a></li>
+                            <li><a href="#">Maintenance</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" class="nav-item">Projects</a></li>
+                    <li><a href="#" class="nav-item">Gallery</a></li>
+                    <li><a href="#" class="nav-item">About</a></li>
+                    <li><a href="#" class="nav-item">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- Right: Contact info, Order, Search, Apps grid -->
+            <div class="header-actions">
+                <div class="contact-phone">
+                    <div class="phone-icon-container">
+                        <i class="fa-solid fa-phone-volume phone-icon"></i>
+                    </div>
+                    <div class="phone-text">
+                        <span class="phone-label">Call Us Phone</span>
+                        <a href="tel:+13526402903" class="phone-number">+1 (352) 640-2903</a>
+                    </div>
+                </div>
+
+                <a href="#" class="btn-order">ORDER NOW</a>
+
+                <button class="circle-btn search-btn" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+
+                <button class="circle-btn apps-btn" aria-label="Apps">
+                    <i class="fa-solid fa-grip-lines"></i>
+                </button>
+
+                <!-- Burger menu for mobile/tablet (right side) -->
+                <button class="burger-menu-btn" id="burgerMenuBtn" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mini Floating Navbar for Desktop (Scroll down state showing only nav items) -->
+    <div class="floating-nav-bar" id="floatingNavBar">
+        <div class="floating-nav-container">
+            <ul class="nav-links">
+                <li><a href="#" class="nav-item active">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="nav-item">Services <i class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Forming & Pouring</a></li>
+                        <li><a href="#">Stamped Concrete</a></li>
+                        <li><a href="#">Commercial Concrete</a></li>
+                        <li><a href="#">Maintenance</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="nav-item">Projects</a></li>
+                <li><a href="#" class="nav-item">Gallery</a></li>
+                <li><a href="#" class="nav-item">About</a></li>
+                <li><a href="#" class="nav-item">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Panel (Slide down full screen) -->
+    <div class="mobile-menu-panel" id="mobileMenuPanel">
+        <!-- Top bar of menu panel: Phone info left, search + close right -->
+        <div class="panel-top-bar">
+            <div class="panel-contact-phone">
+                <div class="panel-phone-icon-container">
+                    <i class="fa-solid fa-phone-volume panel-phone-icon"></i>
+                </div>
+                <div class="panel-phone-text">
+                    <span class="panel-phone-label">Call Us Phone</span>
+                    <a href="tel:+13526402903" class="panel-phone-number">+1 (352) 640-2903</a>
+                </div>
+            </div>
+            <div class="panel-actions-right">
+                <button class="panel-circle-btn panel-search-btn" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button class="panel-close-btn" id="panelCloseBtn" aria-label="Close Navigation Menu">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Middle: Nav Links -->
+        <nav class="panel-nav">
+            <ul class="panel-nav-links">
+                <li><a href="#" class="panel-nav-item">Home</a></li>
+                <li class="panel-dropdown">
+                    <div class="panel-dropdown-toggle">
+                        <span class="panel-nav-item">Services</span>
+                        <i class="fa-solid fa-chevron-down panel-arrow"></i>
+                    </div>
+                    <ul class="panel-dropdown-menu">
+                        <li><a href="#">Forming & Pouring</a></li>
+                        <li><a href="#">Stamped Concrete</a></li>
+                        <li><a href="#">Commercial Concrete</a></li>
+                        <li><a href="#">Maintenance</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="panel-nav-item">Projects</a></li>
+                <li><a href="#" class="panel-nav-item">Gallery</a></li>
+                <li><a href="#" class="panel-nav-item">About</a></li>
+                <li><a href="#" class="panel-nav-item">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Bottom: Order Now Button -->
+        <div class="panel-bottom-bar">
+            <a href="#" class="panel-btn-order">ORDER NOW</a>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        poster="assets/hero-poster.webp">
+        
+        <source src="assets/hero-bg.mp4" type="video/mp4">
+    </video>
+       
+            <div class="hero-overlay"></div>
+            <div class="hero-container">
+                <!-- Left panel: Text and buttons -->
+                    <div class="hero-content-left">
+                        <span class="hero-badge"><span class="tag-dot"></span>FAMILY OWNED SINCE 1965</span>
+                        <h1 class="hero-title">
+                            Central Florida's
+                            Trusted Ready Mix
+                            Concrete
+                        </h1>
+                        <p class="hero-description">
+                            Three generations of quality, reliability, and innovation. From residential foundations to commercial high-rises, we deliver the concrete that builds Florida.
+                        </p>
+                        <div class="hero-actions-row">
+                            <a href="#" class="btn-hero-primary">
+                                <span>ORDER READY MIX</span>
+                                <div class="arrow-circle"><i class="fa-solid fa-arrow-right-long fa-rotate-by" style="--fa-rotate-angle: -45deg;"></i></div>
+                            </a>
+                            <a href="#" class="btn-hero-secondary">
+                                <span>ESTIMATE VOLUME</span>
+                                <div class="arrow-circle"><i class="fa-solid fa-arrow-right-long fa-rotate-by" style="--fa-rotate-angle: -45deg;"></i></div>
+                            </a>
+                        </div>
+                    </div>
+
+                <!-- Right panel: Two curve corner boxes -->
+                <div class="hero-content-right">
+                    <!-- Box 1: Stats box -->
+                    <div class="hero-box-stat">
+                        <div class="stat-number-wrapper">
+                            <span class="stat-number" id="countNumber">1</span><span class="stat-plus">+</span>
+                        </div>
+                        <p class="stat-subtext">YEARS DELIVERING CONCRETE EXCELLENCE</p>
+                        <div class="stat-footer">
+                            <span>Established 1970</span>
+                            <span>• Central Florida</span>
+                        </div>
+                    </div>
+
+                    <!-- Box 2: Image box loop -->
+                    <div class="hero-box-image">
+                        <img src="assets/hero-right-mini.png" alt="Del Zotto Concrete Delivery" class="hero-mini-img active" id="miniImg1">
+                        <img src="assets/hero-right-mini-2.png" alt="Del Zotto Concrete Mixing" class="hero-mini-img" id="miniImg2">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    <section class="services-section">
+     
+    </section>
+    </main>
+
+    <script src="script/script.js" defer></script>
+</body>
+</html>
