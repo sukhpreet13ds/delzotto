@@ -23,12 +23,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 2. Mobile Dropdown Toggle (Services dropdown in mobile view)
-    if (panelDropdownToggle && panelDropdown) {
-        panelDropdownToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            panelDropdown.classList.toggle('active');
+// 2. Mobile Dropdown Toggles
+const panelDropdowns = document.querySelectorAll('.panel-dropdown');
+
+panelDropdowns.forEach(dropdown => {
+    const toggle = dropdown.querySelector('.panel-dropdown-toggle');
+
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        // Optional: close other open dropdowns
+        panelDropdowns.forEach(item => {
+            if (item !== dropdown) {
+                item.classList.remove('active');
+            }
         });
-    }
+
+        // Toggle current dropdown
+        dropdown.classList.toggle('active');
+    });
+});
 
     // 3. Desktop Scroll Behavior (Sticky/Floating Nav items bar)
     window.addEventListener('scroll', () => {
@@ -107,5 +121,39 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 4000); // changes image every 4 seconds
     }
-});
+    // Apps side panel
+    const appsPanel = document.getElementById("appsSidePanel");
+    const appsBackdrop = document.getElementById("appsPanelBackdrop");
+    const appsClose = document.getElementById("appsPanelClose");
 
+    // Open buttons
+    const appsOpenButtons = document.querySelectorAll(".apps-btn");
+
+    // Open panel
+    appsOpenButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            appsPanel.classList.add("open");
+            document.body.style.overflow = "hidden"; // Prevent page scroll
+        });
+    });
+
+    // Close panel function
+    function closeAppsPanel() {
+        appsPanel.classList.remove("open");
+        document.body.style.overflow = "";
+    }
+
+    // Close button
+    appsClose.addEventListener("click", closeAppsPanel);
+
+    // Backdrop click
+    appsBackdrop.addEventListener("click", closeAppsPanel);
+
+    // ESC key
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && appsPanel.classList.contains("open")) {
+            closeAppsPanel();
+        }
+    });
+
+});
