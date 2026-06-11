@@ -147,7 +147,7 @@ body {
     transition: color 0.3s ease;
 }
 
-.nav-item:hover,
+.nav-item:hover,    
 .nav-item.active {
     color: var(--text-color);
 }
@@ -1243,12 +1243,40 @@ body {
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
     cursor: pointer;
 }
-
+.wwa-img-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(116, 42, 44, 0.45); /* #742A2C light */
+    transform: translateY(-100%);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+    pointer-events: none;
+}
+.wwa-img-card:hover::before {
+    transform: translateY(0);
+}
 .wwa-img-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.45);
 }
-
+.wwa-img-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 28px 24px;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.82) 50%,
+        rgba(0, 0, 0, 0.95) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    z-index: 2; /* Above hover layer */
+}
 .wwa-img {
     width: 100%;
     height: 100%;
@@ -2529,27 +2557,641 @@ body {
 }
 
 
+/* HERO RESI SECTION (residential-concrete.html)*/
+
+.main-services {
+    background: #ffffff;
+}
+
+.hero-resi-section {
+    position: relative;
+    background: #ffffff;
+    overflow: visible;
+}
+
+/* ---- Top dark band with BG image ---- */
+.resi-hero-top {
+    position: relative;
+    padding: 80px 20px 140px 20px;
+    text-align: center;
+    overflow: hidden;
+    min-height: 70vh;
+}
+
+.resi-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.resi-hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+
+.resi-hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 5, 5, 0.82);
+}
+
+.resi-hero-title-wrap {
+    position: relative;
+    z-index: 2;
+}
+
+.resi-hero-title {
+    font-family: var(--font-heading);
+    font-size: 90px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -1px;
+    text-align: center;
+    padding-top: 100px;
+}
+
+/* ---- Banner image — pulled up to overlap dark bg ---- */
+.resi-hero-banner-wrap {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    max-width: 1200px;
+    margin: -250px auto 0 auto;
+    padding: 0 24px;
+}
+
+.resi-hero-banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+/* ---- White content below banner ---- */
+.resi-hero-content {
+    padding: 60px 24px 80px 24px;
+    text-align: center;
+    max-width: 1010px;
+    margin: 0 auto;
+}
+
+.resi-hero-sub-title {
+    font-family: var(--font-body);
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #191919;
+    margin: 0 0 28px 0;
+}
+
+.resi-hero-desc {
+    font-size: 20px;
+    line-height: 1.75;
+    color: #4d4d52;
+    margin: 0 0 18px 0;
+}
+
+.resi-hero-desc:last-of-type {
+    margin-bottom: 40px;
+}
+
+/* CTA button */
+.btn-resi-quote {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background-color: var(--primary-color-btn);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    padding: 10px 10px 10px 22px;
+    border-radius: 999px;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 4px 20px rgba(116, 42, 44, 0.3);
+}
+
+.btn-resi-quote:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(116, 42, 44, 0.5);
+}
+
+.btn-resi-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: background 0.3s;
+}
+
+.btn-resi-quote:hover .btn-resi-arrow {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+
+/* RESI BUILT SECTION & RESI CONCRETE SECTION */
+
+.resi-built-section {
+    background: #000000;
+    width: 100%;
+}
+
+.resi-built-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.resi-built-left {
+    flex: 1;
+    position: relative;
+    min-height: 520px;
+}
+
+.resi-built-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.resi-built-right {
+    flex: 1;
+    background: #000000;
+    display: flex;
+    align-items: center;
+    padding: 80px 8% 80px 2%;
+}
+
+.resi-built-content {
+    max-width: 540px;
+}
+
+.resi-built-title {
+    font-family: var(--font-heading);
+    font-size: 52px;
+    font-weight: 500;
+    line-height: 1.15;
+    color: #ffffff;
+    margin-bottom: 30px;
+    letter-spacing: -0.5px;
+}
+
+.resi-built-desc {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+
+.resi-built-desc:last-child {
+    margin-bottom: 0;
+}
+
+
+.resi-concrete-section {
+    background: #ffffff;
+    padding: 120px 24px;
+    width: 100%;
+}
+
+.resi-concrete-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.resi-concrete-heading {
+    font-family: var(--font-heading);
+    font-size: 64px;
+    color: #111111;
+    text-align: center;
+    margin-bottom: 80px;
+    letter-spacing: -1px;
+    font-weight: 500;
+}
+
+.resi-concrete-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.resi-concrete-card {
+    background: #ffffff;
+    border-radius: 30px;
+    padding: 50px 40px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.03), 0 4px 12px rgba(0, 0, 0, 0.01);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.resi-concrete-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06), 0 5px 15px rgba(0, 0, 0, 0.02);
+}
+
+.resi-concrete-icon-wrap {
+    margin-bottom: 30px;
+}
+
+.resi-concrete-icon {
+    height: 65px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.resi-concrete-card-title {
+    font-family: var(--font-heading);
+    font-size: 40px;
+    font-weight: 500;
+    color: #111111;
+    margin-bottom: 18px;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+}
+
+.resi-concrete-card-desc {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.7;
+    color: #000;
+}
 
 
 
+/* RESI HOME OWNERS SECTION */
+.resi-home-owners {
+    position: relative;
+    padding: 120px 24px;
+    overflow: hidden;
+    width: 100%;
+    z-index: 1;
+}
 
+.resi-home-owners::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('../assets/gallery-1.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -2;
+}
 
+.resi-home-owners-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 5, 5, 0.82);
+    z-index: -1;
+}
 
+.resi-home-owners-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
 
+.resi-home-owners-heading {
+    font-family: var(--font-heading);
+    font-size: 52px;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 80px;
+    letter-spacing: -1px;
+    font-weight: 500;
+}
 
+.resi-home-owners-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
 
+.resi-home-owners-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(116, 42, 44, 0.6);
+    border-radius: 20px;
+    padding: 40px 30px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
 
+.resi-home-owners-card:hover {
+    border-color: rgba(116, 42, 44, 1);
+    transform: translateY(-5px);
+}
 
+.resi-home-owners-card-title {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 18px;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
 
+.resi-home-owners-card-desc {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
 
+/* RESI ESTIMATE SECTION */
+.resi-estimate {
+    background: #ffffff;
+    padding: 120px 24px;
+    width: 100%;
+}
 
+.resi-estimate-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
 
+.resi-estimate-heading {
+    font-family: var(--font-heading);
+    font-size: 64px;
+    color: #191919;
+    text-align: center;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+    font-weight: 500;
+}
 
+.resi-estimate-subtext {
+    font-family: var(--font-body);
+    font-size: 22px;
+    color: var(--bg-color);
+    text-align: center;
+    margin-bottom: 80px;
+}
 
+.resi-calc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-bottom: 80px;
+}
 
+.resi-calc-card {
+    background: #ffffff;
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
 
+.resi-calc-header {
+    background: #22252a;
+    padding: 24px 30px;
+    text-align: center;
+}
 
+.resi-calc-header h3 {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0;
+}
 
+.resi-calc-body {
+    padding: 40px 30px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.resi-calc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.resi-calc-row label {
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 500;
+    color: #111111;
+    flex: 1;
+}
+
+.resi-calc-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 180px;
+}
+
+.resi-calc-input-wrap input {
+    width: 100%;
+    height: 42px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 0 12px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: #111111;
+    background: #ffffff;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.resi-calc-input-wrap input:focus {
+    border-color: var(--primary-color-btn);
+}
+
+.resi-calc-input-wrap select {
+    height: 28px;
+    border: none;
+    background: #000000;
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 0 16px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    min-width: 88px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    padding-right: 28px;
+}
+
+.resi-calc-btn {
+    /* width: calc(100% - 60px); */
+    margin: 0 0px 0px 0px;
+    height: 50px;
+    background: var(--primary-color-btn);
+    color: #ffffff;
+    border: none;
+    /* border-radius: 12px; */
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.resi-calc-btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+.resi-calc-btn:active {
+    transform: translateY(0);
+}
+
+.resi-estimate-help {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.resi-estimate-help h3 {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    color: #000;
+    margin-bottom: 12px;
+    font-weight: 400;
+}
+
+.resi-estimate-help p {
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: #000;
+}
+
+/* RESI CTA SECTION */
+.resi-cta {
+    position: relative;
+    padding: 120px 24px;
+    overflow: hidden;
+    width: 100%;
+    z-index: 1;
+    text-align: center;
+}
+
+.resi-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('../assets/gallery-16.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -2;
+}
+
+.resi-cta-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(116, 42, 44, 0.95), rgba(116, 42, 44, 0.85));
+    z-index: -1;
+}
+
+.resi-cta-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.resi-cta-heading {
+    font-family: var(--font-heading);
+    font-size: 58px;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+}
+
+.resi-cta-subtext {
+    font-family: var(--font-body);
+    font-size: 30px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 48px;
+    max-width: 840px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.resi-cta-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.btn-resi-cta-primary,
+.btn-resi-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 1.8px;
+    padding: 10px 10px 10px 22px;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+    font-family: var(--font-heading);
+}
+
+.btn-resi-cta-primary {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.btn-resi-cta-primary:hover {
+    background-color: #111111;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.btn-resi-cta-secondary {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1.5px solid #ffffff;
+}
+
+.btn-resi-cta-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
 
 
 /* 1. LARGEST SCREENS (Separate) */
@@ -2690,6 +3332,46 @@ body {
 
     .footer-logo {
         height: 100px;
+    }
+      .resi-hero-title {
+        font-size: 79px;
+        margin-bottom: 40px;
+    }
+
+    .resi-hero-banner-wrap {
+        max-width: 900px;
+        margin-top: -150px;
+    }
+     
+    .resi-hero-sub-title {
+        font-size: 32px;
+    }
+
+    .resi-built-title {
+        font-size: 46px;
+    }
+    .resi-concrete-heading {
+        font-size: 54px;
+        margin-bottom: 60px;
+    }
+    .resi-concrete-card {
+        padding: 40px 30px;
+    }
+    .resi-concrete-card-title {
+        font-size: 28px;
+    }
+
+    .resi-home-owners-heading,
+    .resi-estimate-heading,
+    .resi-cta-heading {
+        font-size: 54px;
+    }
+    .resi-estimate-subtext,
+    .resi-cta-subtext {
+        font-size: 18px;
+    }
+    .resi-calc-header h3{
+        font-size: 22px;
     }
 }
 
@@ -2978,6 +3660,66 @@ body {
 
     .footer-nav-list li a {
         font-size: 13px;
+    }
+    .resi-hero-top {
+        padding: 70px 20px 130px 20px;
+    }
+
+    .resi-hero-title {
+        font-size: 58px;
+    }
+
+    .resi-hero-banner-wrap {
+        max-width: 720px;
+        margin-top: -100px;
+    }
+
+    .resi-hero-sub-title {
+        font-size: 28px;
+    }
+
+    .resi-hero-desc {
+        font-size: 15px;
+    }
+
+    .resi-built-title {
+        font-size: 38px;
+    }
+    .resi-built-desc {
+        font-size: 16px;
+    }
+    .resi-concrete-heading {
+        font-size: 48px;
+        margin-bottom: 50px;
+    }
+    .resi-concrete-grid {
+        gap: 24px;
+    }
+    .resi-concrete-card {
+        padding: 35px 25px;
+        border-radius: 20px;
+    }
+    .resi-concrete-card-title {
+        font-size: 24px;
+    }
+    .resi-concrete-card-desc {
+        font-size: 15px;
+    }
+
+    .resi-home-owners-heading,
+    .resi-estimate-heading,
+    .resi-cta-heading {
+        font-size: 46px;
+    }
+    .resi-home-owners-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .resi-calc-grid {
+        gap: 20px;
+    }
+    .resi-estimate-subtext,
+    .resi-cta-subtext {
+        font-size: 16px;
     }
 }
 
@@ -3369,6 +4111,101 @@ body {
         flex-direction: column;
         text-align: center;
         gap: 10px;
+    }
+     .resi-hero-top {
+        padding: 60px 16px 120px 16px;
+    }
+
+    .resi-hero-title {
+        font-size: 46px;
+        letter-spacing: 0;
+    }
+
+    .resi-hero-banner-wrap {
+        max-width: 90%;
+        margin-top: -90px;
+        padding: 0 16px;
+    }
+
+    .resi-hero-banner-img {
+        border-radius: 16px;
+    }
+
+    .resi-hero-content {
+        padding: 50px 24px 60px 24px;
+    }
+
+    .resi-hero-sub-title {
+        font-size: 26px;
+    }
+
+    .resi-hero-desc {
+        font-size: 15px;
+    }
+
+    .resi-built-container {
+        flex-direction: column;
+    }
+    .resi-built-left {
+        min-height: 380px;
+    }
+    .resi-built-right {
+        padding: 60px 40px;
+    }
+    .resi-built-title {
+        font-size: 36px;
+    }
+    .resi-concrete-heading {
+        font-size: 42px;
+        margin-bottom: 40px;
+    }
+    .resi-concrete-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+    .resi-concrete-card {
+        padding: 35px 25px;
+        border-radius: 20px;
+    }
+    .resi-concrete-card-title {
+        font-size: 24px;
+    }
+
+    .resi-home-owners {
+        padding: 80px 24px;
+    }
+    .resi-home-owners-heading,
+    .resi-estimate-heading,
+    .resi-cta-heading {
+        font-size: 40px;
+    }
+    .resi-home-owners-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .resi-estimate {
+        padding: 80px 24px;
+    }
+    .resi-calc-grid {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+        margin: 0 auto 50px auto;
+        gap: 30px;
+    }
+    .resi-cta {
+        padding: 80px 24px;
+    }
+    .resi-cta-subtext {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+    .resi-hero-banner-wrap {
+        max-width: 800px;
+        margin-top: -150px;
+    }
+    .resi-hero-title{
+        font-size: 68px;
+        margin-top: 80px;
     }
 }
 
@@ -3940,4 +4777,189 @@ body {
         min-width: 0;
         margin: 0;
     }
+     .resi-hero-top {
+        padding: 50px 16px 10px 16px !important;
+    }
+
+    .resi-hero-title {
+        font-size: 44px;
+        letter-spacing: 0;
+        padding-top: 180px;
+    }
+
+    .resi-hero-banner-wrap {
+        max-width: 100%;
+        margin-top: -70px;
+        padding: 0 12px;
+    }
+
+    .resi-hero-banner-img {
+        border-radius: 12px;
+    }
+
+    .resi-hero-content {
+        padding: 40px 16px 50px 16px;
+    }
+
+    .resi-hero-sub-title {
+        font-size: 40px;
+        text-align: left;
+
+    }
+
+    .resi-hero-desc {
+        font-size: 18px;
+        text-align: left;
+    }
+
+    .btn-resi-quote {
+        font-size: 16px;
+        letter-spacing: 1.2px;
+        padding: 14px 20px 14px 28px;
+        gap: 10px;
+    }
+
+    .btn-resi-arrow {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .resi-built-container {
+        flex-direction: column;
+    }
+    .resi-built-left {
+        min-height: 280px;
+    }
+    .resi-built-right {
+        padding: 50px 20px;
+    }
+    .resi-built-title {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    .resi-built-desc {
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 16px;
+    }
+    .resi-concrete-section {
+        padding: 60px 16px;
+    }
+    .resi-concrete-heading {
+        font-size: 40px;
+        margin-bottom: 30px;
+        text-align: left;
+    }
+    .resi-concrete-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .resi-concrete-card {
+        padding: 30px 20px;
+        border-radius: 16px;
+    }
+    .resi-concrete-card-title {
+        font-size: 26px;
+    }
+    .resi-concrete-card-desc {
+        font-size: 18px;
+    }
+ .resi-concrete-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 16px;
+        padding-bottom: 10px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .resi-concrete-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .resi-concrete-card {
+        flex: 0 0 85%;
+        scroll-snap-align: start;
+    }
+    .resi-home-owners {
+        padding: 60px 16px;
+    }
+
+    .resi-home-owners-heading,
+    .resi-estimate-heading
+   {
+        font-size: 40px;
+        margin-bottom: 40px;
+        text-align: left;
+    }
+     .resi-cta-heading {
+        font-size: 40px;
+     }
+    .resi-home-owners-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .resi-home-owners-card {
+        padding: 30px 20px;
+    }
+    .resi-home-owners-card-title {
+        font-size: 24px;
+    }
+    .resi-estimate {
+        padding: 60px 16px;
+    }
+    .resi-estimate-subtext {
+        font-size: 18px;
+        margin-bottom: 40px;
+        text-align: left;
+    }
+    .resi-calc-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-bottom: 40px;
+    }
+    .resi-calc-header {
+        padding: 20px;
+    }
+    .resi-calc-header h3 {
+        font-size: 20px;
+    }
+    .resi-calc-body {
+         padding: 30px 20px;
+    }
+    .resi-calc-btn {
+        margin: 0 0px 0px 0px;
+    }
+    .resi-estimate-help h3 {
+        font-size: 40px;
+    }
+    .resi-estimate-help p {
+        font-size: 18px;
+    }
+    .resi-cta {
+        padding: 60px 16px;
+    }
+    .resi-cta-subtext {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+    .resi-cta-buttons {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .btn-resi-cta-primary,
+    .btn-resi-cta-secondary {
+        width: 100%;
+        max-width: 320px;
+        justify-content: space-between;
+    }
 }
+
+
+
+
+
+
+
+
