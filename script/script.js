@@ -156,4 +156,177 @@ panelDropdowns.forEach(dropdown => {
         }
     });
 
+    // YouTube Video Play Action
+    const locationPlayBtn = document.getElementById('locationPlayBtn');
+    const locationVideoWrapper = document.getElementById('locationVideoWrapper');
+    if (locationPlayBtn && locationVideoWrapper) {
+        locationPlayBtn.addEventListener('click', () => {
+            locationVideoWrapper.innerHTML = `
+                <iframe src="https://www.youtube.com/embed/H1F46w6IfKU?autoplay=1" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                </iframe>
+            `;
+        });
+    }
+
+    // ==========================================
+    // PROJECTS SLIDER LOGIC
+    // ==========================================
+    const sliderWrapper = document.getElementById('projectsSliderWrapper');
+    const prevBtn = document.getElementById('projectsPrevBtn');
+    const nextBtn = document.getElementById('projectsNextBtn');
+    const rangeFill = document.getElementById('projectsRangeFill');
+    
+    if (sliderWrapper) {
+        const slides = Array.from(sliderWrapper.querySelectorAll('.project-slide'));
+        const totalSlides = slides.length;
+        let currentIndex = 0;
+        let autoSlideTimer = null;
+
+        function updateSlider() {
+            slides.forEach((slide, idx) => {
+                slide.classList.remove('active', 'prev', 'next');
+                
+                // Determine layout mapping
+                const prevIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                const nextIndex = (currentIndex + 1) % totalSlides;
+
+                if (idx === currentIndex) {
+                    slide.classList.add('active');
+                } else if (idx === prevIndex) {
+                    slide.classList.add('prev');
+                } else if (idx === nextIndex) {
+                    slide.classList.add('next');
+                }
+            });
+
+            // Update bottom range bar fill
+            if (rangeFill) {
+                const fillPercentage = ((currentIndex + 1) / totalSlides) * 100;
+                rangeFill.style.width = `${fillPercentage}%`;
+            }
+        }
+
+        function showNext() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function showPrev() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        // Auto sliding timer (runs every 2 seconds)
+        function startAutoSlide() {
+            stopAutoSlide();
+            autoSlideTimer = setInterval(() => {
+                showNext();
+            }, 2000);
+        }
+
+        function stopAutoSlide() {
+            if (autoSlideTimer) {
+                clearInterval(autoSlideTimer);
+            }
+        }
+
+        function resetAutoSlide() {
+            startAutoSlide();
+        }
+
+        // Controls
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                showNext();
+                resetAutoSlide();
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                showPrev();
+                resetAutoSlide();
+            });
+        }
+
+        // Click on a slide directly to go to it
+        slides.forEach((slide, idx) => {
+            slide.addEventListener('click', (e) => {
+                // If it is next or prev slide, go to it
+                if (slide.classList.contains('next')) {
+                    e.preventDefault();
+                    showNext();
+                    resetAutoSlide();
+                } else if (slide.classList.contains('prev')) {
+                    e.preventDefault();
+                    showPrev();
+                    resetAutoSlide();
+                }
+            });
+        });
+
+        // Touch Swipe / Drag Handling
+        let startX = 0;
+        let isDragging = false;
+
+        sliderWrapper.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            stopAutoSlide();
+        }, { passive: true });
+
+        sliderWrapper.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+        }, { passive: true });
+
+        sliderWrapper.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (diff > 50) {
+                showNext();
+            } else if (diff < -50) {
+                showPrev();
+            }
+            isDragging = false;
+            resetAutoSlide();
+        }, { passive: true });
+
+        // Mouse Drag Handling
+        sliderWrapper.addEventListener('mousedown', (e) => {
+            startX = e.clientX;
+            isDragging = true;
+            stopAutoSlide();
+        });
+
+        sliderWrapper.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            const endX = e.clientX;
+            const diff = startX - endX;
+            if (diff > 50) {
+                showNext();
+            } else if (diff < -50) {
+                showPrev();
+            }
+            isDragging = false;
+            resetAutoSlide();
+        });
+
+        sliderWrapper.addEventListener('mouseleave', () => {
+            if (isDragging) {
+                isDragging = false;
+                resetAutoSlide();
+            }
+        });
+
+        // Initialize state
+        updateSlider();
+        startAutoSlide();
+    }
+
 });
