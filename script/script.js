@@ -157,21 +157,19 @@ panelDropdowns.forEach(dropdown => {
     });
 
     // YouTube Video Play Action
-    const locationPlayBtn = document.getElementById('locationPlayBtn');
-    const locationVideoWrapper = document.getElementById('locationVideoWrapper');
-    if (locationPlayBtn && locationVideoWrapper) {
-        locationPlayBtn.addEventListener('click', () => {
-            locationVideoWrapper.innerHTML = `
-                <iframe src="https://www.youtube.com/embed/H1F46w6IfKU?autoplay=1" 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen>
-                </iframe>
-            `;
-        });
-    }
+   const locationPlayBtn = document.getElementById('locationPlayBtn');
+const locationVideoWrapper = document.getElementById('locationVideoWrapper');
+
+if (locationPlayBtn && locationVideoWrapper) {
+    locationPlayBtn.addEventListener('click', () => {
+       locationVideoWrapper.innerHTML = `
+    <video autoplay controls playsinline class="location-video-player">
+        <source src="assets/testi.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+`;
+    });
+}
 
     // ==========================================
     // PROJECTS SLIDER LOGIC
