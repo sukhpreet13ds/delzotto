@@ -7,23 +7,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const panelDropdownToggle = document.querySelector('.panel-dropdown-toggle');
     const panelDropdown = document.querySelector('.panel-dropdown');
 
-    // 1. Mobile Menu Panel Toggle
     if (burgerMenuBtn && mobileMenuPanel) {
         burgerMenuBtn.addEventListener('click', () => {
             mobileMenuPanel.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background page scroll when panel is open
+            document.body.style.overflow = 'hidden'; 
         });
     }
 
     if (panelCloseBtn && mobileMenuPanel) {
         panelCloseBtn.addEventListener('click', () => {
             mobileMenuPanel.classList.remove('active');
-            document.body.style.overflow = ''; // Restore background page scroll
+            document.body.style.overflow = ''; 
         });
     }
 
-    // 2. Mobile Dropdown Toggle (Services dropdown in mobile view)
-// 2. Mobile Dropdown Toggles
+ 
 const panelDropdowns = document.querySelectorAll('.panel-dropdown');
 
 panelDropdowns.forEach(dropdown => {
@@ -32,21 +30,18 @@ panelDropdowns.forEach(dropdown => {
     toggle.addEventListener('click', (e) => {
         e.stopPropagation();
 
-        // Optional: close other open dropdowns
         panelDropdowns.forEach(item => {
             if (item !== dropdown) {
                 item.classList.remove('active');
             }
         });
 
-        // Toggle current dropdown
+       
         dropdown.classList.toggle('active');
     });
 });
 
-    // 3. Desktop Scroll Behavior (Sticky/Floating Nav items bar)
     window.addEventListener('scroll', () => {
-        // Floating navbar only triggers on desktops/landscape tablets (>= 992px)
         if (window.innerWidth >= 992) {
             if (window.scrollY > 120) {
                 mainHeader.classList.add('scrolled-down');
@@ -56,19 +51,17 @@ panelDropdowns.forEach(dropdown => {
                 floatingNavBar.classList.remove('active');
             }
         } else {
-            // Remove scroll styling on smaller views
             mainHeader.classList.remove('scrolled-down');
             floatingNavBar.classList.remove('active');
         }
     });
 
-    // 4. Handle Window Resize
     window.addEventListener('resize', () => {
         if (window.innerWidth < 992) {
             mainHeader.classList.remove('scrolled-down');
             floatingNavBar.classList.remove('active');
         } else {
-            // If user expands screen width while mobile panel is open, close it
+            
             if (mobileMenuPanel && mobileMenuPanel.classList.contains('active')) {
                 mobileMenuPanel.classList.remove('active');
                 document.body.style.overflow = '';
@@ -76,11 +69,10 @@ panelDropdowns.forEach(dropdown => {
         }
     });
 
-    // 5. Stat Count Animation (1 to 50)
     const countNumber = document.getElementById('countNumber');
     if (countNumber) {
         let target = 50;
-        let duration = 1800; // duration in milliseconds
+        let duration = 1800; 
         let startTime = null;
 
         const animateCount = (timestamp) => {
@@ -88,7 +80,6 @@ panelDropdowns.forEach(dropdown => {
             const progress = timestamp - startTime;
             const percent = Math.min(progress / duration, 1);
             
-            // Ease-out cubic calculation for smooth slowdown at the end
             const easeOutCubic = 1 - Math.pow(1 - percent, 3);
             const currentCount = Math.floor(easeOutCubic * (target - 1) + 1);
             
@@ -101,13 +92,11 @@ panelDropdowns.forEach(dropdown => {
             }
         };
 
-        // Delay slightly for visual comfort after page load
         setTimeout(() => {
             requestAnimationFrame(animateCount);
         }, 300);
     }
 
-    // 6. Loop Mini Image Switcher (hero-right-mini.png <-> hero-right-mini-2.png)
     const miniImg1 = document.getElementById('miniImg1');
     const miniImg2 = document.getElementById('miniImg2');
     if (miniImg1 && miniImg2) {
@@ -119,44 +108,36 @@ panelDropdowns.forEach(dropdown => {
                 miniImg2.classList.remove('active');
                 miniImg1.classList.add('active');
             }
-        }, 4000); // changes image every 4 seconds
+        }, 4000); 
     }
-    // Apps side panel
     const appsPanel = document.getElementById("appsSidePanel");
     const appsBackdrop = document.getElementById("appsPanelBackdrop");
     const appsClose = document.getElementById("appsPanelClose");
 
-    // Open buttons
     const appsOpenButtons = document.querySelectorAll(".apps-btn");
 
-    // Open panel
     appsOpenButtons.forEach(button => {
         button.addEventListener("click", function () {
             appsPanel.classList.add("open");
-            document.body.style.overflow = "hidden"; // Prevent page scroll
+            document.body.style.overflow = "hidden"; 
         });
     });
 
-    // Close panel function
     function closeAppsPanel() {
         appsPanel.classList.remove("open");
         document.body.style.overflow = "";
     }
 
-    // Close button
     appsClose.addEventListener("click", closeAppsPanel);
 
-    // Backdrop click
     appsBackdrop.addEventListener("click", closeAppsPanel);
 
-    // ESC key
     document.addEventListener("keydown", function (e) {
         if (e.key === "Escape" && appsPanel.classList.contains("open")) {
             closeAppsPanel();
         }
     });
 
-    // YouTube Video Play Action
    const locationPlayBtn = document.getElementById('locationPlayBtn');
 const locationVideoWrapper = document.getElementById('locationVideoWrapper');
 
@@ -171,9 +152,6 @@ if (locationPlayBtn && locationVideoWrapper) {
     });
 }
 
-    // ==========================================
-    // PROJECTS SLIDER LOGIC
-    // ==========================================
     const sliderWrapper = document.getElementById('projectsSliderWrapper');
     const prevBtn = document.getElementById('projectsPrevBtn');
     const nextBtn = document.getElementById('projectsNextBtn');
@@ -189,7 +167,6 @@ if (locationPlayBtn && locationVideoWrapper) {
             slides.forEach((slide, idx) => {
                 slide.classList.remove('active', 'prev', 'next');
                 
-                // Determine layout mapping
                 const prevIndex = (currentIndex - 1 + totalSlides) % totalSlides;
                 const nextIndex = (currentIndex + 1) % totalSlides;
 
@@ -202,7 +179,6 @@ if (locationPlayBtn && locationVideoWrapper) {
                 }
             });
 
-            // Update bottom range bar fill
             if (rangeFill) {
                 const fillPercentage = ((currentIndex + 1) / totalSlides) * 100;
                 rangeFill.style.width = `${fillPercentage}%`;
@@ -219,7 +195,6 @@ if (locationPlayBtn && locationVideoWrapper) {
             updateSlider();
         }
 
-        // Auto sliding timer (runs every 2 seconds)
         function startAutoSlide() {
             stopAutoSlide();
             autoSlideTimer = setInterval(() => {
@@ -237,7 +212,6 @@ if (locationPlayBtn && locationVideoWrapper) {
             startAutoSlide();
         }
 
-        // Controls
         if (nextBtn) {
             nextBtn.addEventListener('click', () => {
                 showNext();
@@ -252,10 +226,9 @@ if (locationPlayBtn && locationVideoWrapper) {
             });
         }
 
-        // Click on a slide directly to go to it
         slides.forEach((slide, idx) => {
             slide.addEventListener('click', (e) => {
-                // If it is next or prev slide, go to it
+                
                 if (slide.classList.contains('next')) {
                     e.preventDefault();
                     showNext();
@@ -268,7 +241,6 @@ if (locationPlayBtn && locationVideoWrapper) {
             });
         });
 
-        // Touch Swipe / Drag Handling
         let startX = 0;
         let isDragging = false;
 
@@ -295,7 +267,6 @@ if (locationPlayBtn && locationVideoWrapper) {
             resetAutoSlide();
         }, { passive: true });
 
-        // Mouse Drag Handling
         sliderWrapper.addEventListener('mousedown', (e) => {
             startX = e.clientX;
             isDragging = true;
@@ -322,9 +293,275 @@ if (locationPlayBtn && locationVideoWrapper) {
             }
         });
 
-        // Initialize state
         updateSlider();
         startAutoSlide();
+    }
+
+    // Auto-sliding Slideshow logic
+    const slideshow = document.getElementById('gallerySlideshow');
+    if (slideshow) {
+        const slides = Array.from(slideshow.querySelectorAll('.gallery-slide'));
+        const indicators = Array.from(slideshow.querySelectorAll('.indicator'));
+        let slideIndex = 0;
+        let slideshowTimer = null;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            indicators.forEach((indicator, i) => {
+                indicator.classList.toggle('active', i === index);
+            });
+            slideIndex = index;
+        }
+
+        function nextSlide() {
+            let nextIndex = (slideIndex + 1) % slides.length;
+            showSlide(nextIndex);
+        }
+
+        function startSlideshow() {
+            stopSlideshow();
+            slideshowTimer = setInterval(nextSlide, 2000);
+        }
+
+        function stopSlideshow() {
+            if (slideshowTimer) clearInterval(slideshowTimer);
+        }
+
+        indicators.forEach((indicator, idx) => {
+            indicator.addEventListener('click', () => {
+                showSlide(idx);
+                startSlideshow();
+            });
+        });
+
+        slideshow.addEventListener('mouseenter', stopSlideshow);
+        slideshow.addEventListener('mouseleave', startSlideshow);
+
+        startSlideshow();
+    }
+
+    // Gallery Lightbox Functionality
+    const galleryLightbox = document.getElementById('galleryLightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+    const galleryImgs = Array.from(document.querySelectorAll('.gallery-img'));
+
+    let currentImgIdx = 0;
+
+    if (galleryLightbox && lightboxImg && galleryImgs.length > 0) {
+        galleryImgs.forEach((img, idx) => {
+            img.addEventListener('click', () => {
+                currentImgIdx = idx;
+                openLightbox(img.src);
+            });
+        });
+
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            galleryLightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            galleryLightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function showNextImg() {
+            currentImgIdx = (currentImgIdx + 1) % galleryImgs.length;
+            lightboxImg.src = galleryImgs[currentImgIdx].src;
+        }
+
+        function showPrevImg() {
+            currentImgIdx = (currentImgIdx - 1 + galleryImgs.length) % galleryImgs.length;
+            lightboxImg.src = galleryImgs[currentImgIdx].src;
+        }
+
+        if (lightboxClose) {
+            lightboxClose.addEventListener('click', closeLightbox);
+        }
+
+        if (lightboxNext) {
+            lightboxNext.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showNextImg();
+            });
+        }
+
+        if (lightboxPrev) {
+            lightboxPrev.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showPrevImg();
+            });
+        }
+
+        galleryLightbox.addEventListener('click', (e) => {
+            if (e.target === galleryLightbox || e.target.classList.contains('lightbox-content')) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (galleryLightbox.classList.contains('active')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') showNextImg();
+                if (e.key === 'ArrowLeft') showPrevImg();
+            }
+        });
+    }
+
+    // Contact page: Update map iframe source when clicking a location info box
+    const contactInfoBoxes = document.querySelectorAll('.contact-info-box');
+    const contactMapIframe = document.getElementById('contactMapIframe');
+
+    if (contactInfoBoxes.length > 0 && contactMapIframe) {
+        contactInfoBoxes.forEach(box => {
+            box.addEventListener('click', () => {
+                const mapUrl = box.getAttribute('data-map-url');
+                if (mapUrl) {
+                    contactMapIframe.src = mapUrl;
+                }
+                
+                // Toggle active styling class
+                contactInfoBoxes.forEach(b => b.classList.remove('active'));
+                box.classList.add('active');
+            });
+        });
+    }
+
+    // Careers page filtering logic
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const mobileFilterSelect = document.getElementById('careerMobileFilter');
+    const jobCards = document.querySelectorAll('.job-card');
+
+    function filterJobs(selectedCategory) {
+        jobCards.forEach(card => {
+            const cardCategory = card.getAttribute('data-category');
+            if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Desktop filtering handler
+    if (filterButtons.length > 0) {
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const category = btn.getAttribute('data-category');
+                filterJobs(category);
+
+                // Keep mobile selector in sync if present
+                if (mobileFilterSelect) {
+                    mobileFilterSelect.value = category;
+                }
+            });
+        });
+    }
+
+    // Mobile select dropdown filtering handler
+    if (mobileFilterSelect) {
+        mobileFilterSelect.addEventListener('change', (e) => {
+            const category = e.target.value;
+            filterJobs(category);
+
+            // Keep desktop list active buttons in sync
+            if (filterButtons.length > 0) {
+                filterButtons.forEach(btn => {
+                    if (btn.getAttribute('data-category') === category) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+        });
+    }
+
+    // Signature Pad Functionality
+    const canvas = document.getElementById('signaturePad');
+    const clearBtn = document.getElementById('clearSignatureBtn');
+
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
+
+        // Set canvas resolution matching layout size
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            
+            // Set drawing settings
+            ctx.strokeStyle = '#111111';
+            ctx.lineWidth = 2.5;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+        }
+
+        // Initialize size
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Drawing helper coordinates
+        function getMousePos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+
+        // Start drawing
+        function startDrawing(e) {
+            drawing = true;
+            const pos = getMousePos(e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+            e.preventDefault();
+        }
+
+        // Draw line
+        function draw(e) {
+            if (!drawing) return;
+            const pos = getMousePos(e);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+            e.preventDefault();
+        }
+
+        // Stop drawing
+        function stopDrawing() {
+            drawing = false;
+        }
+
+        // Mouse listeners
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        // Touch listeners for mobile devices
+        canvas.addEventListener('touchstart', startDrawing, { passive: false });
+        canvas.addEventListener('touchmove', draw, { passive: false });
+        canvas.addEventListener('touchend', stopDrawing);
+
+        // Clear button
+        if (clearBtn) {
+            clearBtn.addEventListener('click', () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            });
+        }
     }
 
 });
