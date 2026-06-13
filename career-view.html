@@ -11,7 +11,120 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/career.css">
-    <link rel="preload" href="assets/hero-bg.mp4" as="video" type="video/mp4">
+    <style>
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+        }
+
+        .main-header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom,
+                    rgba(255, 255, 255, 0.98) 0%,
+                    rgba(255, 255, 255, 0.9) 25%,
+                    rgba(255, 255, 255, 0.7) 60%,
+                    rgba(255, 255, 255, 0) 100%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .main-header.scrolled-down {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+
+        .nav-item {
+            font-family: var(--font-body);
+            font-size: 18px;
+            font-weight: 500;
+            color: #000 !important;
+            text-decoration: none;
+            position: relative;
+            padding: 10px 0;
+            letter-spacing: 0.3px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            color: var(--text-color);
+        }
+
+        /* Premium underline glow animation */
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: none;
+            box-shadow: 0 0 10px var(--primary-color-btn);
+            transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .nav-item:hover::after,
+        .nav-item.active::after {
+            width: 100%;
+        }
+
+        .floating-nav-container .nav-item {
+            color: #fff !important;
+        }
+
+        .contact-phone {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-right: 10px;
+        }
+
+        .phone-icon-container {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.904);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .phone-icon {
+            font-size: 18px;
+            color: #000;
+            transform: rotate(-15deg);
+            transition: transform 0.3s ease;
+        }
+
+        .phone-number {
+            font-size: 14px;
+            font-weight: 700;
+            color: #000;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .phone-label {
+            color: #000;
+        }
+
+        .burger-menu-btn {
+            color: #742A2C;
+        }
+    </style>
 </head>
 
 <body>
@@ -35,16 +148,7 @@
                             <li><a href="commercial-concrete.html">Commercial Concrete</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-item">Projects <i
-                                class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Ocala Plant</a></li>
-                            <li><a href="#">Homosassa Plant</a></li>
-                            <li><a href="#">Community Project</a></li>
-                            <li><a href="#">Dunellon</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="projects.html" class="nav-item">Projects</a></li>
                     <li><a href="gallery.html" class="nav-item ">Gallery</a></li>
                     <li><a href="about-us.html" class="nav-item">About</a></li>
                     <li><a href="contact-us.html" class="nav-item">Contact</a></li>
@@ -63,7 +167,7 @@
                     </div>
                 </div>
 
-                <a href="#" class="btn-order">ORDER NOW</a>
+                <a href="delivery-quote.html" class="btn-order">ORDER NOW</a>
 
                 <button class="circle-btn search-btn" aria-label="Search">
                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -92,15 +196,7 @@
                         <li><a href="commercial-concrete.html">Commercial Concrete</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="nav-item">Projects <i class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Ocala Plant</a></li>
-                        <li><a href="#">Homosassa Plant</a></li>
-                        <li><a href="#">Community Project</a></li>
-                        <li><a href="#">Dunellon</a></li>
-                    </ul>
-                </li>
+                <li><a href="projects.html" class="nav-item">Projects</a></li>
                 <li><a href="gallery.html" class="nav-item ">Gallery</a></li>
                 <li><a href="#" class="nav-item">About</a></li>
                 <li><a href="contact-us.html" class="nav-item">Contact</a></li>
@@ -144,25 +240,14 @@
                         <li><a href="commercial-concrete.html">Commercial Concrete</a></li>
                     </ul>
                 </li>
-                <li class="panel-dropdown">
-                    <div class="panel-dropdown-toggle">
-                        <span class="panel-nav-item">Projects</span>
-                        <i class="fa-solid fa-chevron-down panel-arrow"></i>
-                    </div>
-                    <ul class="panel-dropdown-menu">
-                        <li><a href="#">Ocala Plant</a></li>
-                        <li><a href="#">Homosassa Plant</a></li>
-                        <li><a href="#">Community Project</a></li>
-                        <li><a href="#">Dunellon</a></li>
-                    </ul>
-                </li>
+                <li><a href="projects.html" class="panel-nav-item">Projects</a></li>
                 <li><a href="gallery.html" class="panel-nav-item">Gallery</a></li>
                 <li><a href="about-us.html" class="panel-nav-item">About</a></li>
                 <li><a href="contact-us.html" class="panel-nav-item active">Contact</a></li>
             </ul>
             <!-- Bottom: Order Now Button -->
             <div class="panel-bottom-bar">
-                <a href="#" class="panel-btn-order">ORDER NOW</a>
+                <a href="delivery-quote.html" class="panel-btn-order">ORDER NOW</a>
             </div>
         </nav>
 
@@ -250,7 +335,7 @@
 
                 <!-- Job Header Info -->
                 <div class="career-view-header">
-                    <h2 class="career-view-title">Civil Engineer</h2>
+                    <h2 class="career-view-title">Production Laborer</h2>
                     <div class="job-tags center-tags">
                         <span class="job-tag">Ocala</span>
                         <span class="job-tag">Full-time</span>
@@ -267,55 +352,61 @@
                 <div class="career-view-body">
 
                     <div class="detail-block">
-                        <h4 class="detail-heading">Company Description</h4>
-                        <p>At WaveCrest Masonry Services, we deliver expert masonry craftsmanship rooted in decades of
-                            experience and a commitment to excellence. Serving both residential and commercial markets,
-                            we specialize in brick, block, and stone installations with a strong emphasis on structural
-                            integrity, timeless aesthetics, and customer satisfaction. We are looking for a Civil
-                            Engineer to join our growing team—someone who shares our passion for quality construction
-                            and takes pride in building durable, beautiful structures.</p>
-                    </div>
-
-                    <div class="detail-block">
                         <h4 class="detail-heading">Role Description</h4>
-                        <p>We are looking for a driven and detail-oriented Civil Engineer to support the planning,
-                            execution, and oversight of masonry and structural projects. The ideal candidate will bring
-                            a solid understanding of structural design, soil mechanics, and construction techniques,
-                            working closely with architects, masons, and project managers to ensure top-tier project
-                            delivery.</p>
+                        <p>Del Zotto Concrete is seeking a hardworking and reliable Production Laborer to support our
+                            concrete production team. This role helps with the production, finishing, handling, and
+                            preparation of concrete products while maintaining a clean, safe, and efficient work
+                            environment.
+                        </p>
                     </div>
 
                     <div class="detail-block">
                         <h4 class="detail-heading">Key Responsibilities:</h4>
                         <ul class="detail-bullets-list">
-                            <li>Collaborate with designers, clients, and project teams to develop and review engineering
-                                plans for masonry structures</li>
-                            <li>Evaluate site conditions and perform technical assessments to ensure project feasibility
-                                and safety</li>
-                            <li>Provide calculations, design input, and technical guidance on load-bearing walls,
-                                retaining walls, foundations, and stone structures</li>
-                            <li>Inspect and approve construction materials and techniques for structural integrity and
-                                code compliance</li>
-                            <li>Prepare CAD drawings, construction details, and submittals as needed</li>
-                            <li>Conduct site visits to monitor progress, solve on-site issues, and ensure adherence to
-                                plans and specs</li>
-                            <li>Coordinate with local municipalities and agencies for permitting and compliance</li>
-                            <li>Assist in estimating project costs, schedules, and material needs</li>
-                            <li>Ensure that all work meets WaveCrest’s standards of craftsmanship and quality</li>
+                            <li>Assist with the production and finishing of concrete products</li>
+
+                            <li>Prepare forms, molds, and work areas for concrete pouring</li>
+
+                            <li>Pour, spread, level, and smooth concrete as needed</li>
+
+                            <li>Remove excess concrete and clean finished surfaces</li>
+
+                            <li>Assist with installing production elements such as steel plates, anchor bolts,
+                                reinforcements, and related components</li>
+
+                            <li>Apply sealants, hardening agents, or other finishing materials when required</li>
+
+                            <li>Remove products from forms or molds once cured</li>
+
+                            <li>Clean, maintain, and organize tools, equipment, and production areas</li>
+
+                            <li>Operate basic hand tools, power tools, and production equipment safely</li>
+
+                            <li>Assist with loading, unloading, moving, and staging materials</li>
+
+                            <li>Follow all safety procedures and company production standards</li>
+
+                            <li>Report equipment issues, material concerns, or safety hazards to supervisors</li>
+
+                            <li>Work as part of a team to meet production goals and deadlines</li>
                         </ul>
                     </div>
 
                     <div class="detail-block">
                         <h4 class="detail-heading">Qualifications:</h4>
                         <ul class="detail-bullets-list">
-                            <li>Bachelor's degree in Civil Engineering (Master's preferred)</li>
-                            <li>PE (Professional Engineer) license preferred or in progress</li>
-                            <li>3+ years of experience in residential or commercial construction, masonry experience a
-                                plus</li>
-                            <li>Proficiency with AutoCAD, Civil 3D, and structural analysis tools</li>
-                            <li>Strong knowledge of local building codes, construction methods, and materials</li>
-                            <li>Excellent organizational, analytical, and communication skills</li>
-                            <li>Ability to manage multiple projects and deadlines simultaneously</li>
+                            <li>Previous concrete, construction, manufacturing, or general labor experience preferred
+                            </li>
+
+                            <li>Ability to lift, carry, bend, stand, and work in a physically active environment</li>
+
+                            <li>Comfortable working outdoors or in a production setting</li>
+
+                            <li>Ability to follow instructions and safety procedures</li>
+
+                            <li>Dependable, punctual, and willing to learn</li>
+
+                            <li>Basic knowledge of hand tools and construction materials is a plus</li>
                         </ul>
                     </div>
 
@@ -329,7 +420,12 @@
                             <li>Collaborative and supportive work environment</li>
                         </ul>
                     </div>
-
+                    <div class="detail-block">
+                        <h4 class="detail-heading">Ideal Candidate</h4>
+                        <p>The ideal candidate is hands-on, dependable, and willing to work hard as part of a team. This
+                            person takes pride in quality work and understands the importance of safety, consistency,
+                            and attention to detail.</p>
+                    </div>
                     <div class="apply-btn-wrap bottom-apply">
                         <a href="employment-application.html" class="btn-see-position btn-apply-now">
                             <span>APPLY NOW</span>
@@ -352,7 +448,7 @@
                 <p class="resi-cta-subtext">Get premium ready mix concrete delivered directly to your job site with
                     reliable scheduling and expert support.</p>
                 <div class="resi-cta-buttons">
-                    <a href="#" class="btn-resi-cta-primary">
+                    <a href="delivery-quote.html" class="btn-resi-cta-primary">
                         <span>REQUEST A QUOTE</span>
                         <div class="arrow-circle"><i class="fa-solid fa-arrow-right-long fa-rotate-by"
                                 style="--fa-rotate-angle: -45deg;"></i></div>
@@ -407,10 +503,11 @@
                     <ul class="footer-nav-list">
                         <li><a href="#">Order Ready Mix</a></li>
                         <li><a href="#">Get a Quote</a></li>
-                        <li><a href="#">Volume Calculator</a></li>
-                        <li><a href="#">Projects</a></li>
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="residential-concrete.html#calculator-vol">Volume Calculator</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="about-us.html">About Us</a></li>
                         <li><a href="careers.html">Careers</a></li>
+                        <li><a href="blogs.html">News & Articles</a></li>
                     </ul>
                 </div>
 

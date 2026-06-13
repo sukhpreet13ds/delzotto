@@ -31,20 +31,12 @@
                         <a href="#" class="nav-item active">Services <i
                                 class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="residential-concrete.html" class="active">Residential Concrete</a></li>
+                            <li><a href="residential-concrete.html" class="drop-item active">Residential Concrete</a>
+                            </li>
                             <li><a href="commercial-concrete.html">Commercial Concrete</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-item">Projects <i
-                                class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Ocala Plant</a></li>
-                            <li><a href="#">Homosassa Plant</a></li>
-                            <li><a href="#">Community Project</a></li>
-                            <li><a href="#">Dunellon</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="projects.html" class="nav-item">Projects</a></li>
                     <li><a href="gallery.html" class="nav-item">Gallery</a></li>
                     <li><a href="about-us.html" class="nav-item">About</a></li>
                     <li><a href="contact-us.html" class="nav-item">Contact</a></li>
@@ -63,7 +55,7 @@
                     </div>
                 </div>
 
-                <a href="#" class="btn-order">ORDER NOW</a>
+                <a href="delivery-quote.html" class="btn-order">ORDER NOW</a>
 
                 <button class="circle-btn search-btn" aria-label="Search">
                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -90,19 +82,11 @@
                     <a href="#" class="nav-item active">Services<i
                             class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="residential-concrete.html" class="active">Residential Concrete</a></li>
+                        <li><a href="residential-concrete.html" class="drop-item active">Residential Concrete</a></li>
                         <li><a href="commercial-concrete.html">Commercial Concrete</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="nav-item">Projects <i class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Ocala Plant</a></li>
-                        <li><a href="#">Homosassa Plant</a></li>
-                        <li><a href="#">Community Project</a></li>
-                        <li><a href="#">Dunellon</a></li>
-                    </ul>
-                </li>
+                <li><a href="projects.html" class="nav-item">Projects</a></li>
                 <li><a href="gallery.html" class="nav-item">Gallery</a></li>
                 <li><a href="about-us.html" class="nav-item">About</a></li>
                 <li><a href="contact-us.html" class="nav-item">Contact</a></li>
@@ -146,25 +130,14 @@
                         <li><a href="commercial-concrete.html">Commercial Concrete</a></li>
                     </ul>
                 </li>
-                <li class="panel-dropdown">
-                    <div class="panel-dropdown-toggle">
-                        <span class="panel-nav-item">Projects</span>
-                        <i class="fa-solid fa-chevron-down panel-arrow"></i>
-                    </div>
-                    <ul class="panel-dropdown-menu">
-                        <li><a href="#">Ocala Plant</a></li>
-                        <li><a href="#">Homosassa Plant</a></li>
-                        <li><a href="#">Community Project</a></li>
-                        <li><a href="#">Dunellon</a></li>
-                    </ul>
-                </li>
+                <li><a href="projects.html" class="panel-nav-item">Projects</a></li>
                 <li><a href="gallery.html" class="panel-nav-item">Gallery</a></li>
                 <li><a href="about-us.html" class="panel-nav-item">About</a></li>
                 <li><a href="contact-us.html" class="panel-nav-item">Contact</a></li>
             </ul>
             <!-- Bottom: Order Now Button -->
             <div class="panel-bottom-bar">
-                <a href="#" class="panel-btn-order">ORDER NOW</a>
+                <a href="delivery-quote.html" class="panel-btn-order">ORDER NOW</a>
             </div>
         </nav>
 
@@ -271,7 +244,7 @@
                 </p>
                 <p class="resi-hero-desc">Whether you're a homeowner, builder, or contractor, our team provides reliable
                     delivery, expert guidance, and the right mix for every residential project.</p>
-                <a href="#" class="btn-resi-quote">
+                <a href="delivery-quote.html" class="btn-resi-quote">
                     <span>REQUEST A RESIDENTIAL QUOTE</span>
                     <div class="arrow-circle"><i class="fa-solid fa-arrow-right-long fa-rotate-by"
                             style="--fa-rotate-angle: -45deg;"></i></div>
@@ -397,7 +370,7 @@
             </div>
         </section>
 
-        <section class="resi-estimate">
+        <section class="resi-estimate" id="calculator-vol">
             <div class="resi-estimate-container">
                 <h2 class="resi-estimate-heading">Estimate Your Concrete Needs</h2>
                 <p class="resi-estimate-subtext">This tool is for estimating only. Please contact our team to verify
@@ -405,7 +378,7 @@
 
                 <div class="resi-calc-grid">
                     <!-- Calc Card 1 -->
-                    <div class="resi-calc-card">
+                    <div class="resi-calc-card" id="calc-slab">
                         <div class="resi-calc-header">
                             <h3>Slabs, Square Footings, or Walls</h3>
                         </div>
@@ -413,45 +386,97 @@
                             <div class="resi-calc-row">
                                 <label>Length</label>
                                 <div class="resi-calc-input-wrap">
-                                    <input type="number" placeholder="" min="0" step="any">
-                                    <select>
-                                        <option value="foot" selected>Foot</option>
-                                        <option value="inch">Inch</option>
+                                    <input type="number" class="calc-length" placeholder="" min="0" step="any"
+                                        value=2.5>
+                                    <select class="calc-length-unit">
+                                        <option value="ft" selected>Foot</option>
+                                        <option value="in">Inch</option>
+                                        <option value="yd">Yard</option>
+                                        <option value="m">Meter</option>
+                                        <option value="cm">Centimeter</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="resi-calc-row">
                                 <label>Width</label>
                                 <div class="resi-calc-input-wrap">
-                                    <input type="number" placeholder="" min="0" step="any">
-                                    <select>
-                                        <option value="foot" selected>Foot</option>
-                                        <option value="inch">Inch</option>
+                                    <input type="number" class="calc-width" placeholder="" min="0" step="any" value=5>
+                                    <select class="calc-width-unit">
+                                        <option value="ft" selected>Foot</option>
+                                        <option value="in">Inch</option>
+                                        <option value="yd">Yard</option>
+                                        <option value="m">Meter</option>
+                                        <option value="cm">Centimeter</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="resi-calc-row">
                                 <label>Thickness or height</label>
                                 <div class="resi-calc-input-wrap">
-                                    <input type="number" placeholder="" min="0" step="any">
-                                    <select>
-                                        <option value="inch" selected>Inch</option>
-                                        <option value="foot">Foot</option>
+                                    <input type="number" class="calc-thickness" placeholder="" min="0" step="any"
+                                        value=5>
+                                    <select class="calc-thickness-unit">
+                                        <option value="in" selected>Inch</option>
+                                        <option value="ft">Foot</option>
+                                        <option value="yd">Yard</option>
+                                        <option value="m">Meter</option>
+                                        <option value="cm">Centimeter</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="resi-calc-row">
                                 <label>Quantity</label>
                                 <div class="resi-calc-input-wrap">
-                                    <input type="number" value="1" min="1">
+                                    <input type="number" class="calc-qty" value=1 min=1>
                                 </div>
                             </div>
+                            <div class="resi-calc-error"
+                                style="color: #dc2626; font-size: 14px; display: none; font-weight: 500; margin-top: 10px;">
+                            </div>
+
+                            <div class="resi-calc-result" style="display: none;">
+                                <table class="result-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Calculation Output</th>
+                                            <th>Result Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Volume in Cubic Feet</td>
+                                            <td><span class="res-cubic-feet">0.00</span> ft³</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Volume in Cubic Yards</td>
+                                            <td><span class="res-cubic-yards">0.00</span> yd³</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Volume in Cubic Meters</td>
+                                            <td><span class="res-cubic-meters">0.00</span> m³</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Weight Needed (lbs and kg)</td>
+                                            <td><span class="res-weight-lbs">0.00</span> lbs / <span
+                                                    class="res-weight-kg">0.00</span> kg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Number of 60-lb Bags</td>
+                                            <td><span class="res-bags-60">0.00</span> bags</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Number of 80-lb Bags</td>
+                                            <td><span class="res-bags-80">0.00</span> bags</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <button class="resi-calc-btn">CALCULATE</button>
+                        <button class="resi-calc-btn btn-calculate">CALCULATE</button>
                     </div>
 
                     <!-- Calc Card 2 -->
-                    <div class="resi-calc-card">
+                    <div class="resi-calc-card" id="calc-hole">
                         <div class="resi-calc-header">
                             <h3>Hole, Column, or Round Footings</h3>
                         </div>
@@ -459,35 +484,83 @@
                             <div class="resi-calc-row">
                                 <label>Diameter</label>
                                 <div class="resi-calc-input-wrap">
-                                    <input type="number" placeholder="" min="0" step="any">
-                                    <select>
-                                        <option value="foot" selected>Foot</option>
-                                        <option value="inch">Inch</option>
+                                    <input type="number" class="calc-diameter" placeholder="" min="0" step="any"
+                                        value=2.5>
+                                    <select class="calc-diameter-unit">
+                                        <option value="ft" selected>Foot</option>
+                                        <option value="in">Inch</option>
+                                        <option value="yd">Yard</option>
+                                        <option value="m">Meter</option>
+                                        <option value="cm">Centimeter</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="resi-calc-row">
                                 <label>Depth or height</label>
                                 <div class="resi-calc-input-wrap">
-                                    <input type="number" placeholder="" min="0" step="any">
-                                    <select>
-                                        <option value="inch" selected>Inch</option>
-                                        <option value="foot">Foot</option>
+                                    <input type="number" class="calc-depth" placeholder="" min="0" step="any" value=6>
+                                    <select class="calc-depth-unit">
+                                        <option value="in" selected>Inch</option>
+                                        <option value="ft">Foot</option>
+                                        <option value="yd">Yard</option>
+                                        <option value="m">Meter</option>
+                                        <option value="cm">Centimeter</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="resi-calc-row">
                                 <label>Quantity</label>
                                 <div class="resi-calc-input-wrap">
-                                    <input type="number" value="1" min="1">
+                                    <input type="number" class="calc-qty" value=1 min=1>
                                 </div>
                             </div>
+                            <div class="resi-calc-error"
+                                style="color: #dc2626; font-size: 14px; display: none; font-weight: 500; margin-top: 10px;">
+                            </div>
+
+                            <div class="resi-calc-result" style="display: none;">
+                                <table class="result-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Calculation Output</th>
+                                            <th>Result Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Volume in Cubic Feet</td>
+                                            <td><span class="res-cubic-feet">0.00</span> ft³</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Volume in Cubic Yards</td>
+                                            <td><span class="res-cubic-yards">0.00</span> yd³</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Volume in Cubic Meters</td>
+                                            <td><span class="res-cubic-meters">0.00</span> m³</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Weight Needed (lbs and kg)</td>
+                                            <td><span class="res-weight-lbs">0.00</span> lbs / <span
+                                                    class="res-weight-kg">0.00</span> kg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Number of 60-lb Bags</td>
+                                            <td><span class="res-bags-60">0.00</span> bags</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Number of 80-lb Bags</td>
+                                            <td><span class="res-bags-80">0.00</span> bags</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <button class="resi-calc-btn">CALCULATE</button>
+                        <button class="resi-calc-btn btn-calculate">CALCULATE</button>
                     </div>
 
                     <!-- Calc Card 3 -->
-                    <div class="resi-calc-card">
+                    <div class="resi-calc-card" id="calc-circular">
                         <div class="resi-calc-header">
                             <h3>Circular Slab or Tube</h3>
                         </div>
@@ -495,41 +568,94 @@
                             <div class="resi-calc-row">
                                 <label>Outer diameter</label>
                                 <div class="resi-calc-input-wrap">
-                                    <input type="number" placeholder="" min="0" step="any">
-                                    <select>
-                                        <option value="foot" selected>Foot</option>
-                                        <option value="inch">Inch</option>
+                                    <input type="number" class="calc-outer-dia" placeholder="" min="0" step="any"
+                                        value=5>
+                                    <select class="calc-outer-dia-unit">
+                                        <option value="ft" selected>Foot</option>
+                                        <option value="in">Inch</option>
+                                        <option value="yd">Yard</option>
+                                        <option value="m">Meter</option>
+                                        <option value="cm">Centimeter</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="resi-calc-row">
                                 <label>Inner diameter</label>
                                 <div class="resi-calc-input-wrap">
-                                    <input type="number" placeholder="" min="0" step="any">
-                                    <select>
-                                        <option value="foot" selected>Foot</option>
-                                        <option value="inch">Inch</option>
+                                    <input type="number" class="calc-inner-dia" placeholder="" min="0" step="any"
+                                        value=4>
+                                    <select class="calc-inner-dia-unit">
+                                        <option value="ft" selected>Foot</option>
+                                        <option value="in">Inch</option>
+                                        <option value="yd">Yard</option>
+                                        <option value="m">Meter</option>
+                                        <option value="cm">Centimeter</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="resi-calc-row">
                                 <label>Length or height</label>
                                 <div class="resi-calc-input-wrap">
-                                    <input type="number" placeholder="" min="0" step="any">
-                                    <select>
-                                        <option value="inch" selected>Inch</option>
-                                        <option value="foot">Foot</option>
+                                    <input type="number" class="calc-length-height" placeholder="" min="0" step="any"
+                                        value=5>
+                                    <select class="calc-length-height-unit">
+                                        <option value="in" selected>Inch</option>
+                                        <option value="ft">Foot</option>
+                                        <option value="yd">Yard</option>
+                                        <option value="m">Meter</option>
+                                        <option value="cm">Centimeter</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="resi-calc-row">
                                 <label>Quantity</label>
                                 <div class="resi-calc-input-wrap">
-                                    <input type="number" value="1" min="1">
+                                    <input type="number" class="calc-qty" value=1 min=1>
                                 </div>
                             </div>
+                            <div class="resi-calc-error"
+                                style="color: #dc2626; font-size: 14px; display: none; font-weight: 500; margin-top: 10px;">
+                            </div>
+
+                            <div class="resi-calc-result" style="display: none;">
+                                <table class="result-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Calculation Output</th>
+                                            <th>Result Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Volume in Cubic Feet</td>
+                                            <td><span class="res-cubic-feet">0.00</span> ft³</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Volume in Cubic Yards</td>
+                                            <td><span class="res-cubic-yards">0.00</span> yd³</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Volume in Cubic Meters</td>
+                                            <td><span class="res-cubic-meters">0.00</span> m³</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Weight Needed (lbs and kg)</td>
+                                            <td><span class="res-weight-lbs">0.00</span> lbs / <span
+                                                    class="res-weight-kg">0.00</span> kg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Number of 60-lb Bags</td>
+                                            <td><span class="res-bags-60">0.00</span> bags</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Number of 80-lb Bags</td>
+                                            <td><span class="res-bags-80">0.00</span> bags</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <button class="resi-calc-btn">CALCULATE</button>
+                        <button class="resi-calc-btn btn-calculate">CALCULATE</button>
                     </div>
                 </div>
 
@@ -547,7 +673,7 @@
                 <p class="resi-cta-subtext">Get premium ready mix concrete delivered directly to your job site with
                     reliable scheduling and expert support.</p>
                 <div class="resi-cta-buttons">
-                    <a href="#" class="btn-resi-cta-primary">
+                    <a href="delivery-quote.html" class="btn-resi-cta-primary">
                         <span>REQUEST A QUOTE</span>
                         <div class="arrow-circle"><i class="fa-solid fa-arrow-right-long fa-rotate-by"
                                 style="--fa-rotate-angle: -45deg;"></i></div>
@@ -608,10 +734,11 @@
                     <ul class="footer-nav-list">
                         <li><a href="#">Order Ready Mix</a></li>
                         <li><a href="#">Get a Quote</a></li>
-                        <li><a href="#">Volume Calculator</a></li>
-                        <li><a href="#">Projects</a></li>
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="residential-concrete.html#calculator-vol">Volume Calculator</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="about-us.html">About Us</a></li>
                         <li><a href="careers.html">Careers</a></li>
+                        <li><a href="blogs.html">News & Articles</a></li>
                     </ul>
                 </div>
 

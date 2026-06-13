@@ -114,7 +114,7 @@ panelDropdowns.forEach(dropdown => {
     const appsBackdrop = document.getElementById("appsPanelBackdrop");
     const appsClose = document.getElementById("appsPanelClose");
 
-    const appsOpenButtons = document.querySelectorAll(".apps-btn");
+    const appsOpenButtons = document.querySelectorAll(".apps-btn, .search-btn");
 
     appsOpenButtons.forEach(button => {
         button.addEventListener("click", function () {
@@ -562,6 +562,278 @@ if (locationPlayBtn && locationVideoWrapper) {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
             });
         }
+    }
+
+
+    function getVal(inputEl) {
+        return inputEl ? parseFloat(inputEl.value) : NaN;
+    }
+
+    function toFeet(value, unit) {
+        switch (unit) {
+            case 'ft': return value;
+            case 'in': return value / 12;
+            case 'yd': return value * 3;
+            case 'm': return value * 3.28084;
+            case 'cm': return value * 0.0328084;
+            default: return value;
+        }
+    }
+
+    function showResults(cardEl, volFt3) {
+        const cubicFeet = volFt3;
+        const cubicYards = cubicFeet / 27;
+        const cubicMeters = cubicFeet * 0.0283168;
+        const weightLbs = cubicFeet * 133;
+        const weightKg = cubicMeters * 2130;
+        const bags60 = weightLbs / 60;
+        const bags80 = weightLbs / 80;
+
+        cardEl.querySelector('.res-cubic-feet').textContent = cubicFeet.toFixed(2);
+        cardEl.querySelector('.res-cubic-yards').textContent = cubicYards.toFixed(2);
+        cardEl.querySelector('.res-cubic-meters').textContent = cubicMeters.toFixed(2);
+        cardEl.querySelector('.res-weight-lbs').textContent = weightLbs.toFixed(2);
+        cardEl.querySelector('.res-weight-kg').textContent = weightKg.toFixed(2);
+        cardEl.querySelector('.res-bags-60').textContent = bags60.toFixed(2);
+        cardEl.querySelector('.res-bags-80').textContent = bags80.toFixed(2);
+
+        const errorEl = cardEl.querySelector('.resi-calc-error');
+        if (errorEl) errorEl.style.display = 'none';
+
+        const resultEl = cardEl.querySelector('.resi-calc-result');
+        if (resultEl) resultEl.style.display = 'block';
+
+        const btnCalc = cardEl.querySelector('.btn-calculate');
+        if (btnCalc) btnCalc.textContent = 'CLEAR';
+    }
+
+    function showError(cardEl, message) {
+        const resultEl = cardEl.querySelector('.resi-calc-result');
+        if (resultEl) resultEl.style.display = 'none';
+
+        const errorEl = cardEl.querySelector('.resi-calc-error');
+        if (errorEl) {
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+        }
+
+        const btnCalc = cardEl.querySelector('.btn-calculate');
+        if (btnCalc) btnCalc.textContent = 'CALCULATE';
+    }
+
+    function resetCalculator(cardEl) {
+        const inputs = cardEl.querySelectorAll('input');
+        inputs.forEach(input => {
+            if (input.classList.contains('calc-qty')) {
+                input.value = '1';
+            } else {
+                input.value = '';
+            }
+        });
+
+        const selects = cardEl.querySelectorAll('select');
+        selects.forEach(select => {
+            const defaultOption = select.querySelector('option[selected]') || select.options[0];
+            if (defaultOption) {
+                select.value = defaultOption.value;
+            }
+        });
+
+        const errorEl = cardEl.querySelector('.resi-calc-error');
+        if (errorEl) {
+            errorEl.style.display = 'none';
+            errorEl.textContent = '';
+        }
+
+        const resultEl = cardEl.querySelector('.resi-calc-result');
+        if (resultEl) {
+            resultEl.style.display = 'none';
+        }
+
+        const btnCalc = cardEl.querySelector('.btn-calculate');
+        if (btnCalc) btnCalc.textContent = 'CALCULATE';
+    }
+
+    //Slab, Square Footings, or Walls
+    const slabCard = document.getElementById('calc-slab');
+    if (slabCard) {
+        const btnCalc = slabCard.querySelector('.btn-calculate');
+
+        btnCalc.addEventListener('click', () => {
+            if (btnCalc.textContent.trim() === 'CLEAR') {
+                resetCalculator(slabCard);
+                return;
+            }
+
+            const lengthInput = slabCard.querySelector('.calc-length');
+            const widthInput = slabCard.querySelector('.calc-width');
+            const thicknessInput = slabCard.querySelector('.calc-thickness');
+            const qtyInput = slabCard.querySelector('.calc-qty');
+
+            const lengthVal = getVal(lengthInput);
+            const widthVal = getVal(widthInput);
+            const thicknessVal = getVal(thicknessInput);
+            const qtyVal = getVal(qtyInput);
+
+            if (lengthInput.value.trim() === '' || widthInput.value.trim() === '' || thicknessInput.value.trim() === '' || qtyInput.value.trim() === '') {
+                showError(slabCard, 'Please fill in all required fields.');
+                return;
+            }
+
+            if (isNaN(lengthVal) || isNaN(widthVal) || isNaN(thicknessVal) || isNaN(qtyVal)) {
+                showError(slabCard, 'Please enter valid numbers.');
+                return;
+            }
+
+            if (lengthVal <= 0 || widthVal <= 0 || thicknessVal <= 0 || qtyVal <= 0) {
+                showError(slabCard, 'All numeric values must be greater than zero.');
+                return;
+            }
+
+            const lengthFt = toFeet(lengthVal, slabCard.querySelector('.calc-length-unit').value);
+            const widthFt = toFeet(widthVal, slabCard.querySelector('.calc-width-unit').value);
+            const thicknessFt = toFeet(thicknessVal, slabCard.querySelector('.calc-thickness-unit').value);
+
+            const volumeFt3 = lengthFt * widthFt * thicknessFt * qtyVal;
+            showResults(slabCard, volumeFt3);
+        });
+    }
+
+    // Hole, Column, or Round Footings
+    const holeCard = document.getElementById('calc-hole');
+    if (holeCard) {
+        const btnCalc = holeCard.querySelector('.btn-calculate');
+
+        btnCalc.addEventListener('click', () => {
+            if (btnCalc.textContent.trim() === 'CLEAR') {
+                resetCalculator(holeCard);
+                return;
+            }
+
+            const diameterInput = holeCard.querySelector('.calc-diameter');
+            const depthInput = holeCard.querySelector('.calc-depth');
+            const qtyInput = holeCard.querySelector('.calc-qty');
+
+            const diameterVal = getVal(diameterInput);
+            const depthVal = getVal(depthInput);
+            const qtyVal = getVal(qtyInput);
+
+            if (diameterInput.value.trim() === '' || depthInput.value.trim() === '' || qtyInput.value.trim() === '') {
+                showError(holeCard, 'Please fill in all required fields.');
+                return;
+            }
+
+            if (isNaN(diameterVal) || isNaN(depthVal) || isNaN(qtyVal)) {
+                showError(holeCard, 'Please enter valid numbers.');
+                return;
+            }
+
+            if (diameterVal <= 0 || depthVal <= 0 || qtyVal <= 0) {
+                showError(holeCard, 'All numeric values must be greater than zero.');
+                return;
+            }
+
+            const diameterFt = toFeet(diameterVal, holeCard.querySelector('.calc-diameter-unit').value);
+            const depthFt = toFeet(depthVal, holeCard.querySelector('.calc-depth-unit').value);
+
+            const volumeFt3 = Math.PI * Math.pow(diameterFt / 2, 2) * depthFt * qtyVal;
+            showResults(holeCard, volumeFt3);
+        });
+    }
+
+    // Circular Slab or Tube
+    const circularCard = document.getElementById('calc-circular');
+    if (circularCard) {
+        const btnCalc = circularCard.querySelector('.btn-calculate');
+
+        btnCalc.addEventListener('click', () => {
+            if (btnCalc.textContent.trim() === 'CLEAR') {
+                resetCalculator(circularCard);
+                return;
+            }
+
+            const outerDiaInput = circularCard.querySelector('.calc-outer-dia');
+            const innerDiaInput = circularCard.querySelector('.calc-inner-dia');
+            const lengthHeightInput = circularCard.querySelector('.calc-length-height');
+            const qtyInput = circularCard.querySelector('.calc-qty');
+
+            const outerDiaVal = getVal(outerDiaInput);
+            const innerDiaVal = getVal(innerDiaInput);
+            const lengthHeightVal = getVal(lengthHeightInput);
+            const qtyVal = getVal(qtyInput);
+
+            if (outerDiaInput.value.trim() === '' || innerDiaInput.value.trim() === '' || lengthHeightInput.value.trim() === '' || qtyInput.value.trim() === '') {
+                showError(circularCard, 'Please fill in all required fields.');
+                return;
+            }
+
+            if (isNaN(outerDiaVal) || isNaN(innerDiaVal) || isNaN(lengthHeightVal) || isNaN(qtyVal)) {
+                showError(circularCard, 'Please enter valid numbers.');
+                return;
+            }
+
+            if (outerDiaVal <= 0 || innerDiaVal <= 0 || lengthHeightVal <= 0 || qtyVal <= 0) {
+                showError(circularCard, 'All numeric values must be greater than zero.');
+                return;
+            }
+
+            const outerDiaUnit = circularCard.querySelector('.calc-outer-dia-unit').value;
+            const innerDiaUnit = circularCard.querySelector('.calc-inner-dia-unit').value;
+
+            const outerDiaFt = toFeet(outerDiaVal, outerDiaUnit);
+            const innerDiaFt = toFeet(innerDiaVal, innerDiaUnit);
+            const lengthHeightFt = toFeet(lengthHeightVal, circularCard.querySelector('.calc-length-height-unit').value);
+
+            if (innerDiaFt >= outerDiaFt) {
+                showError(circularCard, 'Inner diameter must be smaller than the outer diameter.');
+                return;
+            }
+
+            const volumeFt3 = Math.PI * lengthHeightFt * (Math.pow(outerDiaFt / 2, 2) - Math.pow(innerDiaFt / 2, 2)) * qtyVal;
+            showResults(circularCard, volumeFt3);
+        });
+    }
+
+    // --- Nested Page Slider Logic ---
+    const nestedSlider = document.querySelector('.nested-slider-container');
+    if (nestedSlider) {
+        const slides = nestedSlider.querySelectorAll('.nested-slide');
+        const thumbs = nestedSlider.querySelectorAll('.nested-thumbnail');
+        const btnPrev = nestedSlider.querySelector('.nav-prev');
+        const btnNext = nestedSlider.querySelector('.nav-next');
+        let activeIndex = 0;
+
+        function updateSlider(index) {
+            slides.forEach((slide, idx) => {
+                slide.classList.toggle('active', idx === index);
+            });
+            thumbs.forEach((thumb, idx) => {
+                thumb.classList.toggle('active', idx === index);
+            });
+            activeIndex = index;
+        }
+
+        if (btnPrev) {
+            btnPrev.addEventListener('click', () => {
+                let nextIdx = activeIndex - 1;
+                if (nextIdx < 0) nextIdx = slides.length - 1;
+                updateSlider(nextIdx);
+            });
+        }
+
+        if (btnNext) {
+            btnNext.addEventListener('click', () => {
+                let nextIdx = activeIndex + 1;
+                if (nextIdx >= slides.length) nextIdx = 0;
+                updateSlider(nextIdx);
+            });
+        }
+
+        thumbs.forEach((thumb, idx) => {
+            thumb.addEventListener('click', () => {
+                updateSlider(idx);
+            });
+        });
     }
 
 });
